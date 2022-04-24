@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const Channel = require('../models/Channel');
+const Channel = require('../models/schemas');
 
 router.get('/', async (req, res) => {
-    Channel.find().exec().then(channels => {
+    Channel.find().select('-shows').exec().then(channels => {
         res.json(channels);
     }).catch(err => {
         res.json({
@@ -41,7 +41,7 @@ router.get('/categories', async (req, res) => {
 router.get('/category/:category', async (req, res) => {
     Channel.find({
         category: req.params.category
-    }).exec().then(channels => {
+    }).select('-shows').exec().then(channels => {
         if (channels.length === 0) {
             res.json({
                 message: 'No channels found in this category'

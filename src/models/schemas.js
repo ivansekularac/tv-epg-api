@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const ShowSchema = mongoose.Schema({
     title: {
         type: String,
@@ -37,10 +38,35 @@ const ShowSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    channel_id: {
+    oid: {
         type: Number,
         required: true,
     }
 });
 
-module.exports = mongoose.model("Show", ShowSchema, "show");
+const ChannelSchema = mongoose.Schema({
+    oid: {
+        type: Number,
+        required: true,
+        unique: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    description: {
+        type: String,
+        required: false,
+    },
+    logo: {
+        type: String,
+        required: true,
+    },
+    category: {
+        type: Array,
+        required: false,
+    },
+    shows: [ShowSchema],
+});
+
+module.exports = mongoose.model("Channel", ChannelSchema, "channel");
