@@ -10,9 +10,7 @@ class Database {
         let uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PSWD}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
         mongoose
             .connect(uri, {
-                useNewUrlParser: true,
-                useNewUrlParser: true,
-                useUnifiedTopology: true
+                useNewUrlParser: true
             })
             .then(() => {
                 console.log("Database connection successful");

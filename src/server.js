@@ -1,10 +1,14 @@
-const express = require('express')
 require('dotenv').config()
+const express = require('express')
 const channels = require('./router/channels')
-const app = express()
-const PORT = process.env.PORT || 5000
-const DB = require("./services/database");
 
+const DB = require("./services/database");
+const PORT = process.env.PORT || 5000;
+
+// Initialize the app
+const app = express()
+
+// Register middleware
 app.use(express.json())
 
 // Register routers
