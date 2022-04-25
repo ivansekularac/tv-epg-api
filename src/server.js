@@ -3,12 +3,14 @@ const express = require('express')
 const channels = require('./router/channels')
 const shows = require('./router/shows')
 
-
-const DB = require("./services/database");
+const Database = require("./services/database");
 const PORT = process.env.PORT || 5000;
 
 // Initialize the app
 const app = express()
+// Initialize connection to database
+const db = new Database();
+db.connect();
 
 // Register middleware
 app.use(express.json())
@@ -18,8 +20,10 @@ app.use('/api/v1/channels', channels)
 app.use('/api/v1/shows', shows)
 
 
-app.get('/', (req, res) => {
-    res.send('Hello World!')
+app.get('/', (_, res) => {
+    res.json({
+        message: 'This endpoint is a ghost town 👻'
+    })
 })
 
 app.listen(PORT, () => {
