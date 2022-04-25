@@ -70,7 +70,7 @@ function getCategories(topic) {
         ]
     }
 
-    return ["z"]
+    return []
 }
 
 module.exports = {
