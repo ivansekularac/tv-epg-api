@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const Channel = require('../models/schemas');
+const Channel = require('../models/Channel');
 
-router.get('/', async (req, res) => {
+router.get('/', async (_, res) => {
     Channel.find().select('-shows').exec().then(channels => {
         res.json(channels);
     }).catch(err => {
@@ -28,7 +28,7 @@ router.get('/get/:id', async (req, res) => {
     });
 });
 
-router.get('/categories', async (req, res) => {
+router.get('/categories', async (_, res) => {
     Channel.distinct('category').exec().then(categories => {
         res.json(categories);
     }).catch(err => {

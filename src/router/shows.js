@@ -2,10 +2,12 @@ const router = require('express').Router();
 const {
     ObjectId
 } = require('mongoose').Types
-const Channel = require('../models/schemas');
+const Channel = require('../models/Channel')
+const Date = require('../models/Date')
 const {
     getCategories
 } = require('../utils/helpers')
+
 
 router.get('', async (req, res) => {
     if (req.query.cid && req.query.from && req.query.to) {
@@ -65,6 +67,17 @@ router.get('', async (req, res) => {
     }
 
 });
+
+router.get('/dates', async (req, res) => {
+    Date.find().exec().then(dates => {
+        res.json(dates)
+    }).catch(err => {
+        res.json({
+            message: err
+        })
+    });
+});
+
 
 router.get('/:category', async (req, res) => {
 
