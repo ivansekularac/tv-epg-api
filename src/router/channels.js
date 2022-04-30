@@ -2,7 +2,7 @@ const router = require('express').Router();
 const Channel = require('../models/Channel');
 
 router.get('/', async (_, res) => {
-    Channel.find().select('-shows').exec().then(channels => {
+    ChannelModel.find().select('-shows').exec().then(channels => {
         res.json(channels);
     }).catch(err => {
         res.json({
